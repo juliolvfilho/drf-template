@@ -7,4 +7,10 @@ exclude =
     .git,
     .env,
     .venv,
-    __pycache__
+    env,
+    venv,
+    ENV,
+    env.bak,
+    venv.bak,
+    __pycache__,
+    migrations,

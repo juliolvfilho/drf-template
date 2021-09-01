@@ -49,3 +49,8 @@ My project template to start projects with Django REST framework
    pip install --upgrade pip
    pip install -r requirements.txt
    ```
+5. Change Django Secret Key
+6. Start codding \o/ (create a core app is recommended)
+   ```sh
+   django-admin startapp core
+   ```

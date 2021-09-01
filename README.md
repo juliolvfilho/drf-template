@@ -3,7 +3,8 @@
 
 My project template to start projects with Django + Django REST framework
 
-### Features
+### Description
 
-- Django 3.2
+- Django 3.2 (Python 3.8 recommended)
 - Flake8 + Black
+- Removed all non-essential apps and middleware

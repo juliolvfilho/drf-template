@@ -1,0 +1,10 @@
+[flake8]
+
+doctests = True
+max-line-length = 88
+ignore = E203,W503
+exclude =
+    .git,
+    .env,
+    .venv,
+    __pycache__

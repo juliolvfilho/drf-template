@@ -9,6 +9,7 @@ My project template to start projects with Django REST framework
 - Django Rest Framework 3.12
 - Removed all non-essential apps and middleware
 - Flake8 + Black (linter and formatter)
+- Default Throttling (prevents a user from making the same API call twice in a very short period)
 
 
 ### Setup

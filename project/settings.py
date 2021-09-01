@@ -25,6 +25,9 @@ SECRET_KEY = "django-insecure-b&spl-j@t=97q@a!3rr=ss#z4&+b(y^1ofw53uy_3mx!4+9how
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# SECURITY WARNING: change value of this setting when in production!
+ENVIRONMENT = "development"
+
 ALLOWED_HOSTS = []
 
 
@@ -69,3 +72,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "UNAUTHENTICATED_USER": None,
+    "DEFAULT_THROTTLE_CLASSES": [],
+}

@@ -5,13 +5,14 @@ from rest_framework.response import Response
 
 class ItWorksAPIView(APIView):
     def get(self, request):
-        return Response({"it_works": True})
+        response = {"it_works": True}
+        if settings.ENVIRONMENT == "development":
+            response["user"] = request.user
+        return Response(response)
 
     def post(self, request):
-        return Response(
-            {
-                "received": request.data
-                if settings.ENVIRONMENT == "development"
-                else True
-            }
-        )
+        response = {"it_works": True}
+        if settings.ENVIRONMENT == "development":
+            response["user"] = request.user
+            response["received"] = request.data
+        return Response(response)

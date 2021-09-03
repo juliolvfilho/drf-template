@@ -11,6 +11,7 @@ My project template to start projects with Django REST framework
 - Flake8 + Black (linter and formatter)
 - Default Throttling (prevents a user from making the same API call twice in a very short period)
 - Automatic setup for Firebase emulators when running development server
+- Firebase Authentication
 
 
 ### Setup

@@ -16,8 +16,7 @@ class Command(RunServer):
         if options["use_firebase_emulator"]:
             self.stdout.write(
                 self.style.WARNING(
-                    "start emulators with 'firebase emulators:start "
-                    "--project my-project-name'\n"
+                    "start emulators with 'firebase emulators:start'\n"
                     "if you don't intend to use emulators, call django command "
                     "'runserver' with the parameter '--no-use-firebase-emulator'"
                 )

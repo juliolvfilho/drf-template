@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import firebase_admin
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -76,7 +77,17 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_AUTHENTICATION_CLASSES": ["project.authentication.FirebaseAuthentication"],
     "UNAUTHENTICATED_USER": None,
     "DEFAULT_THROTTLE_CLASSES": ["project.throttling.DebounceThrottle"],
 }
+
+
+# Firebase configuration
+# https://firebase.google.com/docs/admin/setup#initialize-sdk
+os.environ.setdefault(
+    "GOOGLE_APPLICATION_CREDENTIALS", str(BASE_DIR / "service-account-file.json")
+)
+FIREBASE_AUTH_HEADER_PREFIX = "Bearer"
+FIREBASE_PROJECT_ID = "my-firebase-project-id"
+FIREBASE_APP = firebase_admin.initialize_app()

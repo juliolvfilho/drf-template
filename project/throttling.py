@@ -22,8 +22,8 @@ class DebounceThrottle(SimpleRateThrottle):
         authenticated. For anonymous requests, a combination of IP address and
         UserAgent hash will be used.
         """
-        if request.user and request.user.is_authenticated:
-            return request.user.pk
+        if request.user:
+            return request.user["uid"]
         else:
             return (
                 super().get_ident(request)

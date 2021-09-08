@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Firebase UI</title>
+
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+</head>
+<body>
+    <div id="firebaseui-auth-container"></div>
+    <p id="token" style="word-break: break-word;"></p>
+    <button id="signOutBtn" onclick="firebase.auth().signOut(); location.reload()" style="display: none;">signOut</button>
+    <button id="getIdTokenBtn" onclick="firebase.auth().currentUser.getIdToken(true).then((token) => {document.getElementById('token').innerHTML = token})" style="display: none;">getIdToken</button>
+    <script type="text/javascript">
+        firebase.initializeApp({"projectId": "my-firebase-project-id", apiKey: "fAkEApIKeYFaKeApIKeyFakeApiKeyFAkeAPIKe"})
+        firebase.auth().useEmulator("http://localhost:9099");
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        ui.start('#firebaseui-auth-container', {
+          signInOptions: [
+            {
+              provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+              requireDisplayName: false
+            }
+          ],
+          callbacks: {
+            signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                firebase.auth().currentUser.getIdToken().then((token) => {document.getElementById("token").innerHTML = token})
+                document.getElementById("signOutBtn").style.display = "inline-block";
+                document.getElementById("getIdTokenBtn").style.display = "inline-block";
+                return false;
+              },
+            },
+        });
+    </script>
+</body>
+</html>

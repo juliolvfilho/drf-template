@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = ["core"]
 
-MIDDLEWARE = []
+MIDDLEWARE = ["requestlogs.middleware.RequestLogsMiddleware"]
 
 ROOT_URLCONF = "project.urls"
 
@@ -73,6 +73,34 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "requestlogs": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+}
+
+REQUESTLOGS = {
+    "STORAGE_CLASS": "project.logging.CustomRequestLogStorage",
+    "ENTRY_CLASS": "project.logging.CustomRequestLogEntry",
+    "SERIALIZER_CLASS": "project.logging.CustomRequestLogEntrySerializer",
+    "SECRETS": ["password", "token"],
+    "METHODS": ("GET", "PUT", "PATCH", "POST", "DELETE"),
+    "SHRINK_JSON_GREATER_THAN": 256,
+}
+
+
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
@@ -80,6 +108,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ["project.authentication.FirebaseAuthentication"],
     "UNAUTHENTICATED_USER": None,
     "DEFAULT_THROTTLE_CLASSES": ["project.throttling.DebounceThrottle"],
+    "EXCEPTION_HANDLER": "requestlogs.views.exception_handler",
 }
 
 
